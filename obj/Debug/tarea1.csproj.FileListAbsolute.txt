@@ -1,0 +1,11 @@
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\tarea1.exe.config
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\tarea1.exe
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\tarea1.pdb
+C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea1.csproj.AssemblyReference.cache
+C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea1.csproj.CoreCompileInputs.cache
+C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea1.exe
+C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea1.pdb
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\OpenTK.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\OpenTK.pdb
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\OpenTK.xml
+C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea1.csproj.CopyComplete
