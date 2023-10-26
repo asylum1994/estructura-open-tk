@@ -7,15 +7,16 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
-
+using Newtonsoft.Json;
 namespace tarea1
 {
+    [Serializable]
     class Parte
     {
-        Dictionary<String, Poligono> dictionaryPoligono;
+        public Dictionary<String, Poligono> dictionaryPoligono { get; set; }
         public Parte()
         {
-            this.dictionaryPoligono = new Dictionary<string, Poligono>();
+            dictionaryPoligono = new Dictionary<string, Poligono>();
             
         }
 
@@ -38,6 +39,31 @@ namespace tarea1
             foreach (Poligono poligono in dictionaryPoligono.Values)
             {
                 poligono.dibujar(cmx,cmy,cmz);
+            }
+        }
+
+        public void traslatar( float x, float y)
+        {
+            foreach (Poligono poligono in dictionaryPoligono.Values)
+            {
+                poligono.traslatar(x, y);
+            }
+        }
+
+
+        public void rotar( String eje,float angle)
+        {
+            foreach (Poligono poligono in dictionaryPoligono.Values)
+            {
+                poligono.rotar(eje,angle);
+            }
+        }
+
+        public void escalar( float escala)
+        {
+            foreach (Poligono poligono in dictionaryPoligono.Values)
+            {
+                poligono.escalar(escala);
             }
         }
 

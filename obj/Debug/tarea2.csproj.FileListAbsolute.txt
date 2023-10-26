@@ -9,3 +9,14 @@ C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea2.csproj.CoreCompileInputs.c
 C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea2.csproj.CopyComplete
 C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea1.exe
 C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea1.pdb
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\System.Text.Json.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\System.Memory.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\System.Text.Encodings.Web.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\System.Buffers.dll
+C:\Users\USUARIO\source\repos\tarea1\obj\Debug\tarea1.exe.config
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\USUARIO\source\repos\tarea1\bin\Debug\Newtonsoft.Json.xml

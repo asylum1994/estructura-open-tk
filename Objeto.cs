@@ -7,20 +7,24 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
-
+//using Newtonsoft.Json;
 namespace tarea1
 {
+    [Serializable]
     class Objeto
     {
-        Dictionary<String, Parte> dictionaryParte;
-         
+       
+        public Dictionary<String, Parte> dictionaryParte {get;set;}
+
+       
 
         public Objeto()
         {
-            this.dictionaryParte = new Dictionary<string, Parte>();
-            
+            this.dictionaryParte = new Dictionary<string, Parte>();    
         }
 
+        
+       
 
         public void add(String key,Parte parte)
         {
@@ -46,6 +50,30 @@ namespace tarea1
             }
         }
 
+        public void traslatar(float x, float y)
+        {
+            foreach (Parte parte in dictionaryParte.Values)
+            {
+                parte.traslatar(x, y);
+            }
+        }
+
+       public void rotar( string eje,float angle)
+        {
+            foreach (Parte parte in dictionaryParte.Values)
+            {
+                parte.rotar(eje,angle);
+            }
+        }
+
+
+        public void escalar( float escala)
+        {
+            foreach (Parte parte in dictionaryParte.Values)
+            {
+                parte.escalar(escala);
+            }
+        }
 
     }
 }
