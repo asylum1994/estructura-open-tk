@@ -14,10 +14,22 @@ namespace tarea1
     class Parte
     {
         public Dictionary<String, Poligono> dictionaryPoligono { get; set; }
+
+        public Punto centroMasa { get; set; }
         public Parte()
         {
             dictionaryPoligono = new Dictionary<string, Poligono>();
-            
+            this.centroMasa = new Punto(0.0f, 0.0f, 0.0f);
+        }
+
+        public Punto get()
+        {
+            return this.centroMasa;
+        }
+
+        public void set(float x, float y, float z)
+        {
+            this.centroMasa = new Punto(x, y, z);
         }
 
         public void add(String key,Poligono poligono)
@@ -34,11 +46,12 @@ namespace tarea1
             dictionaryPoligono.Remove(key);
         }
 
-        public void dibujar(float cmx,float cmy,float cmz)
+        public void dibujar(Punto centroObjeto)
         {
+            Punto centroParte = centroObjeto + this.centroMasa; 
             foreach (Poligono poligono in dictionaryPoligono.Values)
             {
-                poligono.dibujar(cmx,cmy,cmz);
+                poligono.dibujar(centroParte);
             }
         }
 
@@ -66,6 +79,8 @@ namespace tarea1
                 poligono.escalar(escala);
             }
         }
+
+       
 
     }
 }

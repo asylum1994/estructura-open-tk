@@ -18,43 +18,53 @@ namespace tarea1
        
         public Color4 color { get; set;}
 
-        Matrix4 modelview = Matrix4.Identity;
-       
+        Matrix4 translation = Matrix4.Identity;
+        Matrix4 rotation = Matrix4.Identity;
+        Matrix4 escalation = Matrix4.Identity;
+        Matrix4 resultado = Matrix4.Identity;
         public Poligono(Color4 color)
         {
             vertice = new List<Punto>();
             
-            this.color = color; 
+            this.color = color;
+          
         }
 
 
-        public void dibujar(float cmx,float cmy, float cmz)
+        public void dibujar(Punto punto)
         {
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadMatrix(ref modelview); 
+            this.resultado = this.rotation * this.translation * this.escalation;
             GL.Begin(PrimitiveType.Polygon);
             GL.Color4(this.color);
+          
             if (this.vertice.Count == 2)
             {
-                dibujarRueda(cmx+this.vertice[0].x,cmy+this.vertice[0].y,cmz+this.vertice[0].z);
-                dibujarRueda(cmx+this.vertice[1].x,cmy+ this.vertice[1].y, cmz+this.vertice[1].z);
+                dibujarRueda(punto.x+this.vertice[0].x,punto.y+this.vertice[0].y,punto.z+this.vertice[0].z,resultado);
+                dibujarRueda(punto.x+this.vertice[1].x,punto.y+ this.vertice[1].y, punto.z+this.vertice[1].z,resultado);
             }
             else
             {
                 foreach (var vertex in this.vertice)
                 {
-                    GL.Vertex3(cmx + vertex.x, cmy + vertex.y, cmz + vertex.z);
+                    
+                     Vector4 vector = Vector4.Transform(new Vector4(punto.x+ vertex.x, punto.x+vertex.y, punto.z+ vertex.z, 1),resultado);
+                
+                    
+                     GL.Vertex3(vector.X, vector.Y, vector.Z);
                 }
             }
-           
+            
+            this.rotation = Matrix4.Identity;
+            this.translation = Matrix4.Identity;
+            this.escalation = Matrix4.Identity;
             GL.End();
            
-            this.modelview = Matrix4.Identity;
+           
         }
 
        
 
-        public void dibujarRueda(float cmx,float cmy,float cmz)
+        public void dibujarRueda(float cmx,float cmy,float cmz,Matrix4 resultado)
         {
 
             GL.Begin(PrimitiveType.Polygon);
@@ -63,80 +73,79 @@ namespace tarea1
                 double angle = 2 * Math.PI * i / 360;
                 double x = cmx + 0.5 * Math.Cos(angle);
                 double y = cmy + 0.5 * Math.Sin(angle);
-                GL.Vertex3(x, y, cmz);
+                Vector4 vector = Vector4.Transform(new Vector4((float)x,(float)y,cmz,1),resultado);
+                GL.Vertex3(vector.X,vector.Y,vector.Z);
             }
             GL.End();
            
         }
 
-
+        
         public void traslatar(float x, float y)
         {
-            this.modelview *= Matrix4.CreateTranslation(x,y,0); 
+            this.translation *= Matrix4.CreateTranslation(x,y,0);
         }
-
 
 
         public void rotar(String eje, float angle)
         {
-              Punto centroMasa = calcularCentroMasa(this.vertice);
-
-            this.modelview = Matrix4.CreateTranslation(-centroMasa.x, -centroMasa.y, -centroMasa.z);
-            Matrix4 rotationMatrix; 
+           
+            
             switch (eje)
             {
                 case "x":
-                     rotationMatrix = Matrix4.CreateRotationX(angle);
-                    this.modelview=rotationMatrix * Matrix4.CreateTranslation(centroMasa.x, centroMasa.y, centroMasa.z);
+
+                     this.rotation *= Matrix4.CreateRotationX(angle);
+                    
+                   
                     break;
                 case "y":
-                     rotationMatrix = Matrix4.CreateRotationY(angle);
-                    this.modelview = rotationMatrix * Matrix4.CreateTranslation(centroMasa.x, centroMasa.y, centroMasa.z);
+
+                     this.rotation *= Matrix4.CreateRotationY(angle);
+                   
+
+
                     break;
                 case "z":
-                     rotationMatrix = Matrix4.CreateRotationZ(angle);
-                    this.modelview = rotationMatrix * Matrix4.CreateTranslation(centroMasa.x, centroMasa.y, centroMasa.z);
-                    break;
-              
+                      this.rotation*= Matrix4.CreateRotationZ(angle);
+                    
+                    break;   
             }
-            GL.MultMatrix(ref modelview);
-           
-        }
 
-        public void escalar(float escala)
-        {
-            this.modelview *= Matrix4.CreateScale(escala,escala,escala); 
+           
+            
+
+
         }
         
-        public Punto calcularCentroMasa(List<Punto> vertices)
-        {
-            float sumX = 0.0f;
-            float sumY = 0.0f;
-            float sumZ = 0.0f;
-
-            foreach (var punto in vertices)
-            {
-                sumX += punto.x;
-                sumY += punto.y;
-                sumZ += punto.z; 
-            }
-            float centerX = sumX / vertices.Count;
-            float centerY = sumY / vertices.Count;
-            float centerZ = sumZ / vertices.Count;
-
-            return new Punto(centerX,centerY,centerZ); 
+        public void escalar(float escala)
+        {   
+            this.escalation *= Matrix4.CreateScale(escala,escala,escala); 
         }
-
-
-        public void mostrar()
+        
+       
+        Vector3 calcularCentroMasa()
         {
-            int i = 0;
+            Vector3 sum = Vector3.Zero;
+            foreach (var vertex in vertice)
+            {
+                Vector3 aux = new Vector3(vertex.x,vertex.y,vertex.z);
+                sum += aux;
+            }
+            return sum / vertice.Count;
+        }
+       
+        
+        public Vector3 sumaVertices()
+        {
+            Vector3 sum = Vector3.Zero;
             foreach (var vertex in this.vertice)
             {
-                Console.WriteLine(i+": "+"( "+vertex.x+","+vertex.y+","+vertex.z+")");
-                i++;
+                sum += new Vector3(vertex.x,vertex.y,vertex.z);
             }
+            return sum; 
         }
+     
 
     }
 

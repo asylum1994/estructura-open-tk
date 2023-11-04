@@ -15,13 +15,23 @@ namespace tarea1
     {
         public Dictionary<String, Objeto> dictionaryObjeto { get; set; }
 
-
+        public Punto centroMasa { get; set;}
         public Escenario()
         {
             dictionaryObjeto = new Dictionary<string, Objeto>();
-
+            this.centroMasa = new Punto(0.0f,0.0f,0.0f);
+            
         }
 
+        public Punto get()
+        {
+            return this.centroMasa;
+        }
+
+        public void set(float x,float y,float z)
+        {
+            this.centroMasa = new Punto(x, y, z); 
+        }
 
         public void add(String key, Objeto parte)
         {
@@ -40,9 +50,11 @@ namespace tarea1
 
         public void dibujar(float cmx, float cmy, float cmz)
         {
+            Punto centroEscenario = new Punto(cmx,cmy,cmz)+this.centroMasa;
+
             foreach (Objeto objeto in dictionaryObjeto.Values)
             {
-                objeto.dibujar(cmx, cmy, cmz);
+                objeto.dibujar(centroEscenario);
             }
         }
 

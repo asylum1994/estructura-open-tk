@@ -22,34 +22,37 @@ namespace tarea1
         public float rotationAngle = 0.0f; // variables para la rotacion
       
         float x=0; float y=0; // variables traslacion
-
+        
         Serializable serializable;
         Escenario escenario;
-        bool traslacion = true; 
-        Objeto pared;
-        Objeto repisa;
-        Objeto auto;
+        Objeto objeto;
+        Objeto objeto1; 
+        /* Objeto pared;
+         Objeto repisa;
+         Objeto auto;
 
-        Parte partePared;
-        Parte parteRepisa;
-        Parte parteAuto; 
+         Parte partePared;
+         Parte parteRepisa;
+         Parte parteAuto; */
 
+     
         public Game(int width,int height):base(width,height,GraphicsMode.Default,"DIBUJANDO OBJETOS CON COORDENADAS RELATIVAS")
      {
               
             WindowState = WindowState.Maximized;
             this.scale = 30.0f;
             serializable = new Serializable();
-           
+
             this.escenario = serializable.deserializarObjeto("figuras.txt");
 
+            
 
 
-            //            serializable.serializarObjeto(escenario,"figuras.txt");
-          
+           // serializable.serializarObjeto(escenario,"figuras.txt");
+
         }
 
-        
+
 
 
 
@@ -65,10 +68,16 @@ namespace tarea1
             Console.WriteLine("ancho : " + Width);
             Console.WriteLine("alto : " + Height);
 
+           /* objeto = escenario.get("auto");
+            objeto1 = escenario.get("auto");*/
            
+
+           
+            
+
         }
-             
-      
+
+
 
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
@@ -86,13 +95,12 @@ namespace tarea1
             }else if (keyboard.IsKeyDown(Key.Left))
             {
                 x -= 1f;
-                
+               
             }
             else if (keyboard.IsKeyDown(Key.Up))
             {
                 y += 1f;
-
-                
+               
             }
             else if (keyboard.IsKeyDown(Key.Down))
             {
@@ -102,12 +110,12 @@ namespace tarea1
 
             if (keyboard.IsKeyDown(Key.A))
             {
-                rotationAngle += 0.01f;
+                rotationAngle += 0.05f;
                 
             }
             else if (keyboard.IsKeyDown(Key.D))
             {
-                rotationAngle -= 0.01f;  
+                rotationAngle -= 0.05f;  
             }
 
            
@@ -134,38 +142,54 @@ namespace tarea1
 
 
             // 4 puntos 
-            
+
             GL.PointSize(5.0f);
             GL.Begin(PrimitiveType.Points);
             GL.Color4(Color4.Black);
-            GL.Vertex3(15.0, 15.0, 15.0);
-            GL.Vertex3(-15.0, 15.0, 15.0);
+
             GL.Vertex3(0, 0, 0);
-            GL.Vertex3(-15.0, -15.0, 15.0);
-            GL.Vertex3(15.0, -15.0, 15.0);
+
             GL.End();
+
+
 
             //  this.escenario.dibujar(15,15,15);
             // this.escenario.dibujar(-15, 15,15);
-            //     this.escenario.dibujar(-15, -15, 15);
-            //    this.escenario.dibujar(15, -15,15);
+            //  this.escenario.dibujar(-15, -15, 15);
+            //   this.escenario.dibujar(15, -15,15);
 
 
 
-            // escenario.rotar("y" , rotationAngle);
-            //     escenario.traslatar(x, y);
-           
-            escenario.get("auto").rotar("y", rotationAngle);
-            escenario.get("auto").traslatar(x, y);
-            // escenario.get("auto").get("parteAuto").get("parteAutoRuedasIzq").traslatar(x,y);
-            //  escenario.get("auto").escalar(escala); 
+           /* escenario.rotar("y", rotationAngle);
+             escenario.traslatar(x, y);
+            escenario.escalar(escala);*/
+
+
+           escenario.get("auto").get("parteAuto").get("parteAutoRuedasIzq").traslatar(x,y);
+            escenario.get("auto").get("parteAuto").get("parteAutoRuedasIzq").rotar("y",rotationAngle);
+            escenario.get("auto").get("parteAuto").get("parteAutoRuedasIzq").escalar(escala); 
+
             //  escenario.escalar(escala);
 
+           /* objeto.escalar(1.5f);
+            objeto.rotar("y", 45.0f);
+            objeto.dibujar(new Punto(5, 5, 5));*/
+
+           /* objeto1.traslatar(-10.0f,5.0f);
+            objeto1.dibujar(new Punto(-5, -5, -5));*/
+
+           /* escenario.get("pared").rotar("x", rotationAngle);
+            escenario.get("pared").traslatar(x, y);
+            escenario.get("pared").escalar(escala);*/
+
+
+            this.escenario.dibujar(0.0f,0.0f,0.0f);
+
+           
 
 
 
 
-            this.escenario.dibujar(0.0f,0.0f,0.0f); 
 
 
             ////////////////////////////////////
